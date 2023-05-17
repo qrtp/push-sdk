@@ -102,6 +102,7 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "husky": "^8.0.0",
+    "immer": "^10.0.2",
     "jest": "27.5.1",
     "jest-react-native": "18.0.0",
     "metro": "0.70.2",

@@ -58,4 +58,9 @@ export const SectionButton = styled.button`
     cursor: pointer;
     background: rgb(226, 8, 128);
   }
+
+  &:disabled{
+    cursor: not-allowed;
+    background: rgb(98, 4, 55);
+  }
 `;

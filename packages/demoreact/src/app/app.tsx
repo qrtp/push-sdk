@@ -31,6 +31,7 @@ import UpdateGroupTest from './ChatTest/UpdateGroupTest';
 import GetGroupTest from './ChatTest/GetGroupTest';
 import GetUsersBatchTest from './ChatTest/GetUsersBatchTest';
 import AuthUpdateUserTest from './ChatTest/AuthUpdateUser';
+import VideoCallTest from './VideoCallTest/VideoCallTest';
 import { Buffer } from 'buffer';
 import { ENV } from './helpers';
 
@@ -211,6 +212,9 @@ export function App() {
                       <Link to="/chat" className="nav-button">
                         CHAT
                       </Link>
+                      <Link to="/video-call" className="nav-button">
+                        VIDEO CALL
+                      </Link>
                     </NavMenu>
                   }
                 />
@@ -245,6 +249,9 @@ export function App() {
                 <Route path="/createGroup" element={<CreateGroupTest />} />
                 <Route path="/getGroup" element={<GetGroupTest />} />
                 <Route path="/updateGroup" element={<UpdateGroupTest />} />
+
+                {/* video route */}
+                <Route path="/video-call" element={<VideoCallTest />} />
               </Routes>
               <ChatSupportTest />
             </SocketContext.Provider>
