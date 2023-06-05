@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import EnvelopeIcon from '../../icons/envelope.svg';
 import MaximizeIcon from '../../icons/maximize.svg';
-import NewChatIcon from '../../icons/newChat.svg';
+import { NewChatIcon } from '../../icons/newChat';
 import { BackIcon } from '../../icons/back';
 import MinimizeIcon from '../../icons/minimize.svg';
 import { Section, Span, Image } from '../reusables/sharedStyling';
@@ -109,18 +109,16 @@ export const SubTabHeader = () => {
 
   return (
     <Section gap="12px">
-      <Image
-        src={BackIcon}
-        alt="back icon"
-        cursor="pointer"
-        width="16px"
-        height="16px"
+      <div
+        style={{ width: '16px', height: '16px' }}
         onClick={() => {
           setActiveTab(PUSH_TABS.CHATS);
           setSearchedChats(null);
           setSelectedChatId(null);
         }}
-      />
+      >
+        <BackIcon />
+      </div>
 
       <Span fontWeight="700" fontSize="16px">
         {PushSubTabTitle[activeSubTab as PushSubTabs].title}
@@ -186,14 +184,12 @@ export const MinimisedModalHeader: React.FC<MinimisedModalHeaderPropType> = ({
       )}
       <Section gap="20px">
         {((!selectedChatId && modalOpen && !activeSubTab) || !modalOpen) && (
-          <Image
-            src={NewChatIcon}
-            alt="new chat"
-            cursor="pointer"
-            width="20px"
-            height="20px"
+          <div
+            style={{ width: '20px', height: '20px' }}
             onClick={() => setNewChat(true)}
-          />
+          >
+            <NewChatIcon />
+          </div>
         )}
         <Image
           src={modalOpen ? MinimizeIcon : MaximizeIcon}
