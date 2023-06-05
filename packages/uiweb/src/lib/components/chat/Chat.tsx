@@ -90,19 +90,25 @@ export const Chat = () => {
   useEffect(() => {
     setChatsFeed({});
     setRequestsFeed({});
-    setActiveTab(activeChosenTab);
+
+    // set active tab if present
+    if (activeChosenTab) {
+      setActiveTab(activeChosenTab);
+      setModalOpen(true);
+    }
 
     setActiveSubTab(null);
 
     setNewChat(false);
     setChats(new Map());
-  }, [account, decryptedPgpPvtKey, env,activeChosenTab]);
+  }, [account, decryptedPgpPvtKey, env, activeChosenTab]);
 
   useEffect(() => {
     (async () => {
       if (activeChat) {
         const address = await getAddress(activeChat, env);
         if (address) {
+          setModalOpen(true);
           setSelectedChatId(walletToPCAIP10(address));
           const selectedChat = chatsFeed[address] || requestsFeed[address];
           if (!selectedChat) {
