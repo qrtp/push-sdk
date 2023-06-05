@@ -1,11 +1,15 @@
 import { ChatMainStateContext, ChatPropsContext } from '../../../../context';
 import { ChatMainStateContextType } from '../../../../context/chat/chatMainStateContext';
-import { getDefaultFeedObject, getNewChatUser, getObjectsWithMatchingKeys } from '../../../../helpers';
+import {
+  getDefaultFeedObject,
+  getNewChatUser,
+  getObjectsWithMatchingKeys,
+} from '../../../../helpers';
 import { ChatFeedsType } from '../../../../types';
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import SearchIcon from '../../../../icons/search.svg';
-import CloseIcon from '../../../../icons/close.svg';
+import { SearchIcon } from '../../../../icons/search';
+import { CloseIcon } from '../../../../icons/close';
 import { Spinner } from '../../../reusables/Spinner';
 import { Section, Span } from '../../../reusables/sharedStyling';
 import useGetChatProfile from '../../../../hooks/chat/useGetChatProfile';
@@ -18,15 +22,15 @@ export const Search: React.FC<SearchPropType> = ({ chatsFeed }) => {
   const [searchedText, setSearchedText] = useState<string>('');
   const { setSearchedChats, web3NameList, newChat } =
     useContext<ChatMainStateContextType>(ChatMainStateContext);
-    const { env } = useContext<any>(ChatPropsContext);
+  const { env } = useContext<any>(ChatPropsContext);
   const [loading, setLoading] = useState<boolean>(false);
   const onChangeSearchText = (val: string) => {
     setSearchedText(val);
   };
 
-  const {fetchChatProfile} = useGetChatProfile();
+  const { fetchChatProfile } = useGetChatProfile();
 
-  const handleSearch = async() => {
+  const handleSearch = async () => {
     const result = getObjectsWithMatchingKeys(
       chatsFeed,
       searchedText,
@@ -36,13 +40,16 @@ export const Search: React.FC<SearchPropType> = ({ chatsFeed }) => {
     if (Object.keys(result || {}).length) setSearchedChats(result);
     else {
       if (!newChat) setSearchedChats({});
-      else{
-        const result = await getNewChatUser({searchText:searchedText,fetchChatProfile,env});
-        if(result){
-            const defaultFeed= getDefaultFeedObject({user:result});
-            setSearchedChats({[defaultFeed.did]:defaultFeed});
-        }
-        else setSearchedChats({});
+      else {
+        const result = await getNewChatUser({
+          searchText: searchedText,
+          fetchChatProfile,
+          env,
+        });
+        if (result) {
+          const defaultFeed = getDefaultFeedObject({ user: result });
+          setSearchedChats({ [defaultFeed.did]: defaultFeed });
+        } else setSearchedChats({});
       }
     }
   };
@@ -77,25 +84,21 @@ export const Search: React.FC<SearchPropType> = ({ chatsFeed }) => {
         onChange={(e) => onChangeSearchText(e.target.value)}
         placeholder="Search User"
         onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-             handleSearch();
-            }
-          }}
+          if (event.key === 'Enter') {
+            handleSearch();
+          }
+        }}
       />
       <Span>
         {!loading && !searchedText && (
-          <Image
-            src={SearchIcon}
-            alt="search icon"
-            onClick={() => handleSearch()}
-          />
+          <div style={{ cursor: 'pointer' }} onClick={() => handleSearch()}>
+            <SearchIcon />
+          </div>
         )}
         {!loading && searchedText && (
-          <Image
-            src={CloseIcon}
-            alt="close icon"
-            onClick={() => onSearchReset()}
-          />
+          <div style={{ cursor: 'pointer' }} onClick={() => onSearchReset()}>
+            <CloseIcon />
+          </div>
         )}
         {loading && <Spinner size="17.49" />}
       </Span>

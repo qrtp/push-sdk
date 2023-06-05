@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import EnvelopeIcon from '../../icons/envelope.svg';
-import MaximizeIcon from '../../icons/maximize.svg';
+import { MaximizeIcon } from '../../icons/maximize';
 import { NewChatIcon } from '../../icons/newChat';
 import { BackIcon } from '../../icons/back';
-import MinimizeIcon from '../../icons/minimize.svg';
+import { MinimizeIcon } from '../../icons/minimize';
 import { Section, Span, Image } from '../reusables/sharedStyling';
 import { ChatMainStateContext, ChatPropsContext } from '../../context';
 import { PushSubTabs, PushTabs, PUSH_SUB_TABS, PUSH_TABS } from '../../types';
@@ -110,7 +109,7 @@ export const SubTabHeader = () => {
   return (
     <Section gap="12px">
       <div
-        style={{ width: '16px', height: '16px' }}
+        style={{ width: '16px', height: '16px', cursor: 'pointer' }}
         onClick={() => {
           setActiveTab(PUSH_TABS.CHATS);
           setSearchedChats(null);
@@ -185,20 +184,18 @@ export const MinimisedModalHeader: React.FC<MinimisedModalHeaderPropType> = ({
       <Section gap="20px">
         {((!selectedChatId && modalOpen && !activeSubTab) || !modalOpen) && (
           <div
-            style={{ width: '20px', height: '20px' }}
+            style={{ width: '20px', height: '20px', cursor: 'pointer' }}
             onClick={() => setNewChat(true)}
           >
             <NewChatIcon />
           </div>
         )}
-        <Image
-          src={modalOpen ? MinimizeIcon : MaximizeIcon}
-          alt="maximize"
-          cursor="pointer"
-          width="12px"
-          height="13.4px"
+        <div
+          style={{ width: '12px', height: '13.4px', cursor: 'pointer' }}
           onClick={onMaximizeMinimizeToggle}
-        />
+        >
+          {modalOpen ? <MinimizeIcon /> : <MaximizeIcon />}
+        </div>
       </Section>
     </Container>
   );

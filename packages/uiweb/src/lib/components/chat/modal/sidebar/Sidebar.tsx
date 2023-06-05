@@ -14,7 +14,7 @@ import { Spinner } from '../../../reusables/Spinner';
 import { Section, Span, Image } from '../../../reusables/sharedStyling';
 import { ChatsFeedList } from './ChatsFeedList';
 import { ChatMainStateContextType } from '../../../../context/chat/chatMainStateContext';
-import AngleArrowIcon from '../../../../icons/angleArrow.svg';
+import { AngleArrowIcon } from '../../../../icons/angleArrow';
 import { device } from '../../../../config';
 import { shortenNumber } from '../../../../helpers';
 
@@ -102,7 +102,7 @@ const SidebarSubTabs: React.FC<SidebarSubTabsPropType> = ({
         border="1px solid #DDDDDF"
         cursor="pointer"
       >
-        <Image src={subTab.icon} alt="Request tab icon" />
+        <subTab.icon />
       </Span>
       <Section
         flexDirection="column"
