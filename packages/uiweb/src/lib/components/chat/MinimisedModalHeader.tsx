@@ -3,16 +3,13 @@ import styled from 'styled-components';
 import EnvelopeIcon from '../../icons/envelope.svg';
 import MaximizeIcon from '../../icons/maximize.svg';
 import NewChatIcon from '../../icons/newChat.svg';
-import BackIcon from '../../icons/back.svg';
+import { BackIcon } from '../../icons/back';
 import MinimizeIcon from '../../icons/minimize.svg';
 import { Section, Span, Image } from '../reusables/sharedStyling';
 import { ChatMainStateContext, ChatPropsContext } from '../../context';
 import { PushSubTabs, PushTabs, PUSH_SUB_TABS, PUSH_TABS } from '../../types';
 import { useResolveWeb3Name } from '../../hooks';
-import {
-  pCAIP10ToWallet,
-  shortenText,
-} from '../../helpers';
+import { pCAIP10ToWallet, shortenText } from '../../helpers';
 import { ethers } from 'ethers';
 import { PushSubTabTitle } from '../../config';
 
@@ -85,12 +82,9 @@ export const MessageBoxHeader = () => {
   };
   return (
     <Section gap="12px">
-      <Image
-        src={BackIcon}
-        alt="back icon"
-        cursor="pointer"
-        onClick={() => handleBack()}
-      />
+      <div onClick={() => handleBack()}>
+        <BackIcon />
+      </div>
       <Section gap="8px">
         <Image
           src={selectedChat.profilePicture!}
@@ -102,7 +96,7 @@ export const MessageBoxHeader = () => {
 
         <Span fontWeight="700" fontSize="16px">
           {' '}
-          {web3Name ?? shortenText(selectedChat?.did?.split(':')[1],20)}
+          {web3Name ?? shortenText(selectedChat?.did?.split(':')[1], 20)}
         </Span>
       </Section>
     </Section>
